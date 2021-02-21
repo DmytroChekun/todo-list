@@ -1,0 +1,14 @@
+.body, * {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10vh 10px 0;
+    padding-top: 10vh;
+}
+#root {
+    background-image: linear-gradient(to right top, #d16ba5, #ab639f, #865b93, #635282, #46476d, #425174, #415a79, #42637d, #5788a0, #6fafc0, #8dd6de, #b1fffa);
+    height: 100vh;
+}

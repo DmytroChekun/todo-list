@@ -1,0 +1,37 @@
+.filter-btns {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.filter-btn {
+    height: 40px;
+    padding: 0 14px;
+    cursor: pointer;
+    transition: .2s;
+    color: #000000;
+    background: rgba( 255, 255, 255, 0.40 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+    border-radius: 10px;
+    &:not(:last-child) {
+        margin-right: 4px;
+    }
+    &:hover {
+        backdrop-filter: blur( 4.5px );
+        -webkit-backdrop-filter: blur( 4.5px );
+        background: rgba(255, 255, 255, 0.829);
+    }
+    &.active {
+        background: rgba( 5, 87, 255, 0.60 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 2.5px );
+        -webkit-backdrop-filter: blur( 2.5px );
+        border-radius: 10px;
+        color: #fff;
+        &:hover {
+            background: rgba(5, 88, 255, 0.801);
+        }
+    }
+    
+}

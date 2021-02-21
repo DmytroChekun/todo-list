@@ -1,0 +1,61 @@
+.list-group {
+}
+.todo-list {
+
+		// .todo-list__item
+
+		&__item {
+		}
+
+		// .todo-list__item-content
+
+		&__item-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+		}
+
+		// .todo-list__item-label
+
+		&__item-label {
+
+		}
+
+		// .todo-list__item-btns
+
+		&__item-btns {
+            display: flex;
+		}
+
+		// .todo-list__item-btn
+
+		&__item-btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background: rgba( 255, 255, 255, 0.40 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 2.5px );
+            -webkit-backdrop-filter: blur( 2.5px );
+            border-radius: 10px;
+            transition: .2s;
+            &:hover {
+                backdrop-filter: blur( 4.5px );
+                -webkit-backdrop-filter: blur( 4.5px );
+                background: rgba(255, 255, 255, 0.829);
+            }
+            &.delete {
+                margin-right: 4px;
+                & svg path {
+                    fill: rgb(182, 17, 50);
+                }
+            }
+            &.important {
+                color: rgb(20, 155, 16);
+            }
+		}
+}
