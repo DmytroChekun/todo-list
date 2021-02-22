@@ -1,66 +1,42 @@
 import React, { Component } from 'react';
 import './filter-btns.scss';
 
-export default class FilterBtns extends Component {
+const FilterBtns = () => {
 
-    render() {
+    const buttonsValue = [
+        { value: 'All', active: true, id: 'all' },
+        { value: 'Active', active: false, id: 'active' },
+        { value: 'Done', active: false, id: 'done' }
+    ];
 
-        // const {value, active, id} = this.props;
 
-        const buttonsValue = [
-            { value: 'All', active: true, id: 'all'},
-            { value: 'Active', active: false, id: 'active' },
-            { value: 'Done', active: false, id: 'done' }
-        ];
-        
-        
+    const Button = ( {value, active, id} ) => {
 
-        const Button = ( { value, active, id } ) => {
-            return (
-                <button className= {active ? 'filter-btn active' : 'filter-btn'} key= {id}>{value}</button>
-            )
+        const onButtonClick = () => {
+            console.log(`Done: ${value}`)
         };
-    
-        const elements = buttonsValue.map((item) => {
-            return <Button { ... item} />
-        })
-    
-    
+
         return (
-            <div className="filter-btns">
-                { elements }
-            </div>
+            <button className= {active ? 'filter-btn active' : 'filter-btn'}
+                key= {id}
+                onClick = { onButtonClick }>
+                {value}
+            </button>
         )
+    };
 
-    }
 
+
+    const elements = buttonsValue.map((item) => {
+        return <Button { ... item} />
+    })
+
+
+    return (
+        <div className="filter-btns">
+            { elements }
+        </div>
+    )
 }
 
-
-// const FilterBtns = () => {
-
-//     const buttonsValue = [
-//         { value: 'All', active: true, id: 'all'},
-//         { value: 'Active', active: false, id: 'active' },
-//         { value: 'Done', active: false, id: 'done' }
-//     ];
-
-//     const Button = ( {value, active, id} ) => {
-//         return (
-//             <button className= {active ? 'filter-btn active' : 'filter-btn'} key= {id}>{value}</button>
-//         )
-//     };
-
-//     const elements = buttonsValue.map((item) => {
-//         return <Button { ... item} />
-//     })
-
-
-//     return (
-//         <div className="filter-btns">
-//             { elements }
-//         </div>
-//     )
-// }
-
-// export default FilterBtns;
+export default FilterBtns;
