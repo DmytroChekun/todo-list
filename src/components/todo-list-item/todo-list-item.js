@@ -35,14 +35,11 @@ import './todo-list-item.scss';
 // }
 
 
-const TodoListItem = function ({label, important = false, onDeleted}) {
+const TodoListItem = function ({label, important = false, onDeleted, onToggleImportant, onToggleDone}) {
 
     const [done, setDone] = useState(false);
     const [importantState, setImportantState] = useState(false);
     
-    // const deleteListItem = () => {
-
-    // }
 
     importantState ? important = true : important = false;
 
@@ -53,7 +50,7 @@ const TodoListItem = function ({label, important = false, onDeleted}) {
 
     return (
         <div className="todo-list__item-content">
-            <span className= {`todo-list__item-label${done ? ' done' : ''}`} onClick={ () => setDone(!done)} style={ style } >{ label }</span>
+            <span className= {`todo-list__item-label${done ? ' done' : ''}`} onClick={ () => setDone(!done) } style={ style } >{ label }</span>
             <span className="todo-list__item-btns">
                 <button
                     className="todo-list__item-btn delete"
