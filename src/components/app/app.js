@@ -12,15 +12,23 @@ const App = () => {
 
     let maxId = 100;
 
+    const createTodoItem = (label) => {
+        return {
+            label: label,
+            important: false,
+            done: false,
+            id: maxId++
+        }
+    }
+
     const todoDataInit = [
-        { label: 'Drink Coffee', important: false, id: 1 },
-        { label: 'Make Awesome App', important: true, id: 2 },
-        { label: 'Drink Coffee', important: false, id: 3 }
+        createTodoItem('Drink Coffee'),
+        createTodoItem('Make Awesome App'),
+        createTodoItem('Have a lunch')
     ];
 
-
-
     const [todoData, setTodoData] = useState(todoDataInit); 
+
 
     const deleteItem = (id) => {
         setTodoData((current) => {
@@ -28,39 +36,97 @@ const App = () => {
         });
     }
 
-    const addItem = (text) => {
-        setTodoData(() => {
-            return [...todoData, {
-                label: text,
-                important: false,
-                id: maxId + todoData.length + 1
-            }];
-        })
-        
-    }
     
     const onToggleImportant = (id) => {
-        console.log('Toggle Important', id);
+        setTodoData((current) => {
+            return current.map(item => {
+                if (item.id === id) {
+                    item.important = !item.important
+                }
+                return item;
+            })
+        });
+
     }
 
     const onToggleDone = (id) => {
-        console.log('Toggle Done', id);
+        setTodoData((current) => {
+            return current.map(item => {
+                if (item.id === id) {
+                    item.done = !item.done
+                }
+                return item;
+            })
+        });
+        
     }
 
-
-    const ToDo = 1;
-    const done = 3;
+    const [doneUndoneCount, setDoneUndoneCount] = useState({doneCount: 0, unDoneCount: 0});
+    useEffect(() => {
+        let doneCount = 0;
+        let unDoneCount = 0;
+        todoData.forEach((current) => {
+            if (current.done) {
+                doneCount++
+            }else {
+                unDoneCount++
+            }
+        });
+        setDoneUndoneCount({doneCount, unDoneCount});
+    }, [todoData])
     
+
+    const [todoValue, setTodoValue] = useState('');
+
+    // const addItem = (todoValue) => {
+    //     setTodoData(() => {
+    //         maxId++
+    //         return [...todoData, {
+    //             label: todoValue,
+    //             important: false,
+    //             done: false,
+    //             id: (maxId++) + todoData.length
+    //         }];
+    //     })
+    //     console.log(todoData);
+    // }
+
+    // useEffect(() => {
+    //     console.log(todoValue)
+    // }, [todoValue])
+
+
+    const addItem = (todoValue) => {
+        if (todoValue.length >= 1){
+            setTodoData([
+                ... todoData,
+                {
+                    label: todoValue,
+                    important: false,
+                    done: false,
+                    id: (maxId++) + todoData.length
+                }
+            ])
+            setTodoValue('');
+            console.log(todoValue);
+        }
+        else {
+            return
+        }
+    }
+    
+
+
     return(
         <div className="container">
-            <TodoHeader toDo={ToDo} done={done} />
+            <TodoHeader toDo={ doneUndoneCount.doneCount } done={ doneUndoneCount.unDoneCount } />
             <TodoList
-            todos={ todoData }
-            onDeleted={ deleteItem }
-            onToggleImportant={ onToggleImportant }
-            onToggleDone={ onToggleDone }
+                todos={ todoData }
+                onDeleted={ deleteItem }
+                onToggleImportant={ onToggleImportant }
+                onToggleDone={ onToggleDone }
             />
-            <AddItemForm onItemAdded={ addItem } />
+            <AddItemForm addItem={ addItem } todoValue= { todoValue } />
         </div>
     );
 };

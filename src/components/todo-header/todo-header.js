@@ -3,7 +3,7 @@ import SearchPanel from '../search-panel/';
 import FilterBtns from '../filter-btns/';
 import './todo-header.scss';
 
-const TodoHeader = ( {toDo, done}) => { 
+const TodoHeader = ( {toDo, done}) => {
     return (
         <div className="todo-header">
             <div className="todo-header__top-section">
@@ -15,7 +15,6 @@ const TodoHeader = ( {toDo, done}) => {
                 <FilterBtns />
             </div>
         </div>
-
     );
 };
 
