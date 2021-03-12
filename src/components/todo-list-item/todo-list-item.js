@@ -47,8 +47,19 @@ const TodoListItem = function ({label, onDeleted, onToggleImportant, onToggleDon
     //     color: important ? 'rgb(0, 78, 0)' : 'black',
     //     fontWeight: important ? 600 : 400
     // };
+    // `todo-list__item-content ${
+    let itemContentClass = '';
+    if (important && done) {
+        itemContentClass = 'todo-list__item-content done important';
+    }else if (important && !done) {
+        itemContentClass = 'todo-list__item-content important';
+    }else if (!important && done) {
+        itemContentClass = 'todo-list__item-content done';
+    }else {
+        itemContentClass = 'todo-list__item-content';
+    }
 
-    let itemContentClass = `todo-list__item-content ${important ? 'important' : '' || done ? 'done' : '' }` ;
+    
     // done ? itemContentClass += ' done' : itemContentClass +='';
     // important ? itemContentClass += ' important' : itemContentClass +='';
 

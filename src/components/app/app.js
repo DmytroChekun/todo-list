@@ -78,23 +78,6 @@ const App = () => {
 
     const [todoValue, setTodoValue] = useState('');
 
-    // const addItem = (todoValue) => {
-    //     setTodoData(() => {
-    //         maxId++
-    //         return [...todoData, {
-    //             label: todoValue,
-    //             important: false,
-    //             done: false,
-    //             id: (maxId++) + todoData.length
-    //         }];
-    //     })
-    //     console.log(todoData);
-    // }
-
-    // useEffect(() => {
-    //     console.log(todoValue)
-    // }, [todoValue])
-
 
     const addItem = (todoValue) => {
         if (todoValue.length >= 1){
@@ -110,18 +93,55 @@ const App = () => {
             setTodoValue('');
             console.log(todoValue);
         }
-        else {
-            return
-        }
     }
     
+    const [searchValue, setSearchValue] = useState('');
 
+    
+
+    const search = (todoData, searchValue) => {
+        if (searchValue.length === 0) {
+            return todoData;
+        }
+        return todoData.filter(item => {
+            return item.label.toLowerCase().includes(searchValue.toLowerCase());
+        })
+    }
+
+    const visibleItems = filter(search(todoData, searchValue), filter);
+
+    const onLabelChange = event => {
+        setSearchValue(event.target.value);
+    }
+
+    const [filterValue, setFilterValue] = useState('active');
+
+    const filter = (items, filter) => {
+        switch(filter) {
+            case 'all':
+                return items;
+            case 'active':
+                return items.filter((item) => !item.done);
+            case 'done':
+                return items.filter((item) => item.done);
+            default:
+                return items;
+        }
+    }
 
     return(
         <div className="container">
-            <TodoHeader toDo={ doneUndoneCount.doneCount } done={ doneUndoneCount.unDoneCount } />
+            <TodoHeader 
+                toDo={ doneUndoneCount.doneCount }
+                done={ doneUndoneCount.unDoneCount }
+                searchValue={ searchValue }
+                setSearchValue={ setSearchValue }
+                search={ search }
+                onLabelChange={ onLabelChange }
+                filter={  }
+            />
             <TodoList
-                todos={ todoData }
+                todos={ visibleItems }
                 onDeleted={ deleteItem }
                 onToggleImportant={ onToggleImportant }
                 onToggleDone={ onToggleDone }
